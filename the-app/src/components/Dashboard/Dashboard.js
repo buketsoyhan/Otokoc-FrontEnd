@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./style.css";
 import Select from "react-select";
@@ -9,6 +9,7 @@ import Product from "../Products/Product";
 
 function Dashboard(props) {
   const { products } = data;
+  const [cardItems, setCardItems] = useState([]);
   const optionsBrand = [
     { value: "ford", label: "Ford" },
     { value: "volvo", label: "Volvo" },
@@ -25,9 +26,9 @@ function Dashboard(props) {
   return (
     <div>
       <div className="header ">
-        <div>
+        {/* <div>
           <FontAwesomeIcon icon="fa-light fa-user" />
-        </div>
+        </div> */}
         <span className="headerStrongText">
           <strong>Otokoç</strong>
           <span className="headerNormalText">Otomotiv</span>
@@ -50,21 +51,20 @@ function Dashboard(props) {
           </div>
 
           <div className="all-products">
-            <p>
+            <div>
               {products.map((product) => (
                 <Product key={product.partNo} product={product}>
                   {" "}
                 </Product>
               ))}
-            </p>
+            </div>
           </div>
         </div>
 
-        <div className="row basket">
-          <strong>Sepet</strong>
+        <div className="basket">
+          <h2><strong>Sepet</strong></h2>
           <div>
-
-
+                {cardItems.length===0 && <div>Sepet Boş</div>}
           </div>
         </div>
       </div>
