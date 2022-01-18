@@ -1,0 +1,9 @@
+.originalItems{
+    display: flex;
+    justify-content: space-between;
+}
+.expandedItems{
+    display: flex;
+    justify-content: space-between;
+}
+

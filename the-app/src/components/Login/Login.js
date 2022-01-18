@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useFormik } from "formik";
-import Modal from "../Modal/index";
+import Modal from "../Modal";
 import * as Yup from "yup";
 import "./style.css";
 import { mergeAll } from "ramda";
@@ -21,9 +20,10 @@ const validationEmailSchema = Yup.object({
 const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [validated, setValidate] = useState([]);
-
+  const [modal, setModal] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [info, setInfo] = useState([]);
+
 
   useEffect(() => {
     validation();
@@ -66,13 +66,20 @@ const Login = (props) => {
       ? setUsername(e.target.value)
       : setPassword(e.target.value);
   };
-  //const formValues = { username, password };
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if(errors.username  === undefined  && errors.password === undefined ? navigate("/dashboard") : null)
-
-    setErrors([]);
+    setModal(true);
+    setInfo(errors);
+    console.log("info", info);
+    if (
+      username !== "" &&
+      password !== "" &&
+      errors.username === undefined &&
+      errors.password === undefined
+        ? navigate("/dashboard")
+        : null
+    )
+      setErrors([]);
     setUsername("");
     setPassword("");
     console.log(errors);
@@ -83,12 +90,16 @@ const Login = (props) => {
 
   return (
     <div className="login">
-      <div className="header ">
+      <div
+        className="header"
+        style={{ display: "flex", justifyContent: "end" }}
+      >
         <span className="headerStrongText">
           <strong>Otokoç</strong>
           <span className="headerNormalText">Otomotiv</span>
         </span>
       </div>
+      <hr></hr>
       <div className="loginForm">
         <h2 className="loginTitle">Giriş</h2>
         <div className="formArea">
@@ -100,13 +111,6 @@ const Login = (props) => {
               onChange={handleChange}
               value={username}
             />
-{/* 
-            {validated !== [] && 
-              alert("asax")
-              
-            } */}
-
-           
 
             <br></br>
 
@@ -117,14 +121,15 @@ const Login = (props) => {
               onChange={handleChange}
               value={password}
             />
-            {/* {errors.password && touched.password && (
-              <div className="error">{errors.password} </div>
-            )} */}
             <br></br>
-            <button type="submit" onClick={handleSubmit}> Giriş Yap </button>
+            <button type="submit" onClick={handleSubmit}>
+              {" "}
+              Giriş Yap{" "}
+            </button>
           </form>
         </div>
       </div>
+      <div className="errorArea"> {modal === true && <Modal info={info} setModal={setModal} modal={modal} />} </div>
     </div>
   );
 };

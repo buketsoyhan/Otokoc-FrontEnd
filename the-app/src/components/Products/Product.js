@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./style.css";
 function Product({ product, shoppingCard, setShoppingCard }) {
-  const [amount, setAmount] = useState("0");
+  const [amount, setAmount] = useState("1");
 
   const onAdd = (product) => {
     const item = {
@@ -11,6 +11,7 @@ function Product({ product, shoppingCard, setShoppingCard }) {
     };
     console.log("item", item);
     setShoppingCard([...shoppingCard, item]);
+    setAmount ("1");
   };
 
   return (
@@ -33,13 +34,15 @@ function Product({ product, shoppingCard, setShoppingCard }) {
           type="number"
           placeholder="Adet"
         ></input>
-        <button
-          style={{ marginLeft: "50px", alignItems: "center" }}
+      <div className="" style={{margin:"auto"}}>
+      <button
+          style={{ marginLeft: "50px", alignItems: "center", width:20, height:20, display:"flex", justifyContent:"center"}}
           className="add-button"
           onClick={() => onAdd(product)}
         >
           +
         </button>
+      </div>
       </div>
     </div>
   );

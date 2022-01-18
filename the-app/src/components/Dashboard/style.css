@@ -3,7 +3,7 @@
 } */
 .header {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
 }
 .headerStrongText {
   margin: 40px 40px 0 0;
@@ -13,6 +13,17 @@
   margin: 40px 40px 0 0;
   font-size: 2.5rem;
   margin-left: 0.5rem;
+}
+.userIcon{
+  /* text-align: center; */
+  display: flex;
+  align-items: center;
+  margin-left: 2rem;
+}
+.icon{
+  margin-top: 40px;
+  font-size: 30px;
+
 }
 
 .main {
@@ -24,12 +35,12 @@
   margin-left: 2rem;
 }
 .dashboard {
-  max-width: 60%;
+  /* max-width: 60%; */
 }
 .basket {
-  margin-right: 150px;
-  max-width: 20%;
-  margin-left: 200px;
+  /* margin-right: 150px;
+  max-width: 250%; */
+  /* margin-left: 200px; */
 }
 
 option {
@@ -59,4 +70,17 @@ option {
 
 .header-bg {
   background-color: #e2e8f0;
+}
+
+.small{
+  margin-left: 200px;
+  margin-right: 20px;
+  font-size: 18px;
+}
+
+.large{
+  margin-left: 50px;
+  margin-right: 20px;
+  font-size: 18px;
+
 }
