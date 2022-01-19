@@ -14,8 +14,8 @@ import ShoppingCard from "../ShoppingCard/ShoppingCard";
 function Dashboard(props) {
   const { products } = data;
   const [filterText, setFilterText] = useState("");
-  const [filterBrand, setFilterBrand] = useState("");
-  const [filterYear, setFilterYear] = useState("");
+  const [filterBrand, setFilterBrand] = useState("Hepsi");
+  const [filterYear, setFilterYear] = useState("Hepsi");
 
   const [expand, setExpand] = useState(false);
   const [shoppingCard, setShoppingCard] = useState([]);
@@ -37,9 +37,17 @@ function Dashboard(props) {
   ];
 
   const filtered = products.filter((product) => {
-    return Object.keys(product).some((key) =>
-      product[key].toString().includes(filterText)
-    );
+    if (filterText !== "") {
+      return product.partNo.toString().includes(filterText);
+    }
+    if (filterBrand !== "Hepsi") {
+      return product.brand.toString().includes(filterBrand);
+    }
+    if (filterYear !== "Hepsi") {
+      return product.year.toString().includes(filterYear);
+    } else {
+      return product;
+    }
   });
 
   return (
@@ -60,19 +68,27 @@ function Dashboard(props) {
             <div>
               <div className="row dashboard">
                 <div className="filter">
-                  <select className="filterBrand">
-                    {optionsBrand.map((optionsBrand) => (
-                      <option value={optionsBrand.value}>
-                        {optionsBrand.label}
-                      </option>
+                  <select
+                    className="filterBrand"
+                    onChange={(e) => {
+                      setFilterBrand(e.target.value);
+                    }}
+                    value={filterBrand}
+                  >
+                    {optionsBrand.map((optionsBrand, index) => (
+                      <option key={index}>{optionsBrand.label}</option>
                     ))}
                   </select>
 
-                  <select className="filterYear">
-                    {optionsYear.map((optionsYear) => (
-                      <option value={optionsYear.value}>
-                        {optionsYear.label}
-                      </option>
+                  <select
+                    className="filterYear"
+                    onChange={(e) => {
+                      setFilterYear(e.target.value);
+                    }}
+                    value={filterYear}
+                  >
+                    {optionsYear.map((optionsYear, index) => (
+                      <option key={index}>{optionsYear.label}</option>
                     ))}
                   </select>
 
