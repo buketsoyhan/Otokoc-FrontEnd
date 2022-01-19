@@ -6,7 +6,7 @@ Otokoç Otomotiv Developer Challenge SET aşaması için hazırlanmış bir proj
 
 git clone https://github.com/buketsoyhan/Otokoc-FrontEnd.git
 
-# Kullanımı 
+# Projenin Açılması
 Projeyi cloneladıktan sonra ilgili dizine giderek VS Code programında açınız.  
 
 cd Otokoc-FrontEnd
