@@ -1,0 +1,17 @@
+.errorBox{
+    max-width: 35%;
+    float: right;
+    margin-bottom: 5rem;
+    margin-right: 5rem;
+    font-size: 20px;
+    border-style: groove;
+}
+.errorBoxTop{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.errors{
+    font-size: 26px;
+    color: red;
+}
