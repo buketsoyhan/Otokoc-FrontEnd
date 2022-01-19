@@ -1,7 +1,6 @@
 import React from "react";
 import "./style.css";
 function ShoppingCard({ shoppingCard, expand, setExpand }) {
-  console.log(shoppingCard);
   
   const sumPrice = (type) =>{
     let sum=0;

@@ -1,7 +1,6 @@
 import React from "react";
 
 function index({ setModal, modal, info }) {
-  console.log("indexteki", info);
   return (
     <div>
       {modal === true && (

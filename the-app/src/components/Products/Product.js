@@ -36,7 +36,7 @@ function Product({ product, shoppingCard, setShoppingCard }) {
         ></input>
       <div className="" style={{margin:"auto"}}>
       <button
-          style={{ marginLeft: "50px", alignItems: "center", width:20, height:20, display:"flex", justifyContent:"center"}}
+          style={{ marginLeft: "200px", alignItems: "center", width:20, height:20, display:"flex", justifyContent:"center"}}
           className="add-button"
           onClick={() => onAdd(product)}
         >

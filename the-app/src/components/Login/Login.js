@@ -6,15 +6,20 @@ import { mergeAll } from "ramda";
 import { useNavigate } from "react-router-dom";
 
 const validationUserSchema = Yup.object({
-  username: Yup.string().min(8).required("Name Zorunlu alan"),
-  password: Yup.string().required("Zorunlu alan"),
+  username: Yup.string().min(8).required("En az 8 karakterli bir kullanıcı adı giriniz"),
+  password: Yup.string().required("Şifre Zorunlu alan").matches(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+    "Şifreniz en az 8 karakter, en az 1 rakam, en az 1 büyük ve 1 küçük harf ve özel karakter içermelidir")
 });
 
 const validationEmailSchema = Yup.object({
   username: Yup.string()
-    .email("Must be a valid email")
+    .email("Geçerli bir email adresi giriniz")
     .required("Email Zorunlu alan"),
-  password: Yup.string().required("Zorunlu alan"),
+  password: Yup.string().matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+    "Şifreniz en az 8 karakter, en az 1 rakam, en az 1 büyük ve 1 küçük harf ve özel karakter içermelidir")
+    .required("Şifre Zorunlu alan")
 });
 
 const Login = (props) => {
@@ -35,7 +40,6 @@ const Login = (props) => {
           .validate({ username, password }, { abortEarly: false })
           .then(() => {
             setErrors({});
-            // successCallback(formValues);
           })
           .catch((err) => {
             if (err.name === "ValidationError") {
@@ -49,7 +53,6 @@ const Login = (props) => {
           .validate({ username, password }, { abortEarly: false })
           .then(() => {
             setErrors({});
-            // successCallback(formValues);
           })
           .catch((err) => {
             if (err.name === "ValidationError") {
@@ -122,7 +125,7 @@ const Login = (props) => {
               value={password}
             />
             <br></br>
-            <button type="submit" onClick={handleSubmit}>
+            <button className="buttonClass" type="submit" onClick={handleSubmit}>
               {" "}
               Giriş Yap{" "}
             </button>

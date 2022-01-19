@@ -13,17 +13,21 @@ import ShoppingCard from "../ShoppingCard/ShoppingCard";
 
 function Dashboard(props) {
   const { products } = data;
-  // const [cardItems, setCardItems] = useState([]);
-  // const [product, setProduct] = useState(data);
+  const [filterText, setFilterText] = useState("");
+  const [filterBrand, setFilterBrand] = useState("");
+  const [filterYear, setFilterYear] = useState("");
+
   const [expand, setExpand] = useState(false);
   const [shoppingCard, setShoppingCard] = useState([]);
 
   const optionsBrand = [
+    { value: "hepsi", label: "Hepsi" },
     { value: "ford", label: "Ford" },
     { value: "volvo", label: "Volvo" },
   ];
 
   const optionsYear = [
+    { value: "hepsi", label: "Hepsi" },
     { value: "2015", label: "2015" },
     { value: "2016", label: "2016" },
     { value: "2017", label: "2017" },
@@ -31,6 +35,15 @@ function Dashboard(props) {
     { value: "2019", label: "2019" },
     { value: "2020", label: "2020" },
   ];
+
+  const filtered = products.filter((product)=>{
+      return Object.keys(product).some((key)=>
+        product[key].toString().includes(filterText)
+      )
+
+  })
+
+  console.log("Yewr", filterYear);
 
   return (
     <div>
@@ -50,13 +63,22 @@ function Dashboard(props) {
             <div>
               <div className="row dashboard">
                 <div className="filter">
-                  <Select className="filterBrand" options={optionsBrand} />
-                  <Select className="filterYear" options={optionsYear} />
+                  <Select className="filterBrand" options={optionsBrand}
+                  value={filterBrand}
+                  onChange={(e)=>{setFilterBrand(e.target.value)}}
+
+                  />
+                  <Select className="filterYear" options={optionsYear}
+                  value={filterYear}
+                  onChange={(e)=>{setFilterYear(e.target.value)}}
+                   />
 
                   <input
                     style={{ height: 62, width: 400 }}
                     type="text"
                     placeholder="Parça No"
+                    value={filterText}
+                    onChange={(e)=>{setFilterText(e.target.value)}}
                   />
                 </div>
 
@@ -70,7 +92,7 @@ function Dashboard(props) {
 
                 <div className="all-products">
                   <div>
-                    {products.map((product) => (
+                    {filtered.map((product) => (
                       <Product
                         key={product.partNo}
                         product={product}
@@ -124,14 +146,6 @@ function Dashboard(props) {
             </div>
           </Col>
         </Row>
-        {/* <Row>
-            <Col style={{ backgroundColor: "violet" }} sm={8}>
-              sm=8
-            </Col>
-            <Col style={{ backgroundColor: "aqua" }} sm={3}>
-              sm=3
-            </Col>
-          </Row> */}
       </div>
     </div>
   );
