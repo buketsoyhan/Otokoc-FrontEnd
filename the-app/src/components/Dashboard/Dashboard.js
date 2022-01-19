@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -6,19 +6,20 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col } from "react-bootstrap";
 
 import "./style.css";
-import Select from "react-select";
 import data from "../Products/data";
 import Product from "../Products/Product";
 import ShoppingCard from "../ShoppingCard/ShoppingCard";
 
 function Dashboard(props) {
-  const { products } = data;
+  let { products } = data;
   const [filterText, setFilterText] = useState("");
   const [filterBrand, setFilterBrand] = useState("Hepsi");
   const [filterYear, setFilterYear] = useState("Hepsi");
 
   const [expand, setExpand] = useState(false);
   const [shoppingCard, setShoppingCard] = useState([]);
+
+  const [result, setResult] = useState(data.products);
 
   const optionsBrand = [
     { value: "hepsi", label: "Hepsi" },
@@ -36,19 +37,30 @@ function Dashboard(props) {
     { value: "2020", label: "2020" },
   ];
 
-  const filtered = products.filter((product) => {
-    if (filterText !== "") {
+  const filtered = (array) =>
+    array.filter((product) => {
       return product.partNo.toString().includes(filterText);
-    }
-    if (filterBrand !== "Hepsi") {
+    });
+
+  const filteredBrand = (array) =>
+    array.filter((product) => {
       return product.brand.toString().includes(filterBrand);
-    }
-    if (filterYear !== "Hepsi") {
+    });
+
+  const filteredYear = (array) =>
+    array.filter((product) => {
       return product.year.toString().includes(filterYear);
-    } else {
-      return product;
-    }
-  });
+    });
+
+  useEffect(() => {
+    let temp = products;
+
+    temp = filtered(temp);
+    temp = filteredBrand(temp);
+    temp = filteredYear(temp);
+
+    setResult(temp);
+  }, [filterText, filterBrand, filterYear]);
 
   return (
     <div>
@@ -113,7 +125,7 @@ function Dashboard(props) {
 
                 <div className="all-products">
                   <div>
-                    {filtered.map((product) => (
+                    {result.map((product) => (
                       <Product
                         key={product.partNo}
                         product={product}
