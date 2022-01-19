@@ -36,14 +36,11 @@ function Dashboard(props) {
     { value: "2020", label: "2020" },
   ];
 
-  const filtered = products.filter((product)=>{
-      return Object.keys(product).some((key)=>
-        product[key].toString().includes(filterText)
-      )
-
-  })
-
-  console.log("Yewr", filterYear);
+  const filtered = products.filter((product) => {
+    return Object.keys(product).some((key) =>
+      product[key].toString().includes(filterText)
+    );
+  });
 
   return (
     <div>
@@ -63,22 +60,30 @@ function Dashboard(props) {
             <div>
               <div className="row dashboard">
                 <div className="filter">
-                  <Select className="filterBrand" options={optionsBrand}
-                  value={filterBrand}
-                  onChange={(e)=>{setFilterBrand(e.target.value)}}
+                  <select className="filterBrand">
+                    {optionsBrand.map((optionsBrand) => (
+                      <option value={optionsBrand.value}>
+                        {optionsBrand.label}
+                      </option>
+                    ))}
+                  </select>
 
-                  />
-                  <Select className="filterYear" options={optionsYear}
-                  value={filterYear}
-                  onChange={(e)=>{setFilterYear(e.target.value)}}
-                   />
+                  <select className="filterYear">
+                    {optionsYear.map((optionsYear) => (
+                      <option value={optionsYear.value}>
+                        {optionsYear.label}
+                      </option>
+                    ))}
+                  </select>
 
                   <input
                     style={{ height: 62, width: 400 }}
                     type="text"
                     placeholder="Parça No"
                     value={filterText}
-                    onChange={(e)=>{setFilterText(e.target.value)}}
+                    onChange={(e) => {
+                      setFilterText(e.target.value);
+                    }}
                   />
                 </div>
 
@@ -107,42 +112,42 @@ function Dashboard(props) {
               </div>
             </div>
           </Col>
-          <Col className= {expand===true ? "large" : "small"}>
+          <Col className={expand === true ? "large" : "small"}>
             <div>
-            <div className="basket">
-          {expand === false && (
-            <a
-              style={{ color: "#0F172A", textDecoration: "none" }}
-              href="#"
-              onClick={() => {
-                setExpand(true);
-              }}
-            >
-              {" "}
-              {`<< Detaylı Sepeti Göster`}
-            </a>
-          )}
+              <div className="basket">
+                {expand === false && (
+                  <a
+                    style={{ color: "#0F172A", textDecoration: "none" }}
+                    href="#"
+                    onClick={() => {
+                      setExpand(true);
+                    }}
+                  >
+                    {" "}
+                    {`<< Detaylı Sepeti Göster`}
+                  </a>
+                )}
 
-          {expand === true && (
-            <a
-              style={{ color: "#0F172A", textDecoration: "none" }}
-              href="#"
-              onClick={() => {
-                setExpand(false);
-              }}
-            >
-              {" "}
-              {`>> Detaylı Sepeti Gizle`}
-            </a>
-          )}
+                {expand === true && (
+                  <a
+                    style={{ color: "#0F172A", textDecoration: "none" }}
+                    href="#"
+                    onClick={() => {
+                      setExpand(false);
+                    }}
+                  >
+                    {" "}
+                    {`>> Detaylı Sepeti Gizle`}
+                  </a>
+                )}
 
-          <ShoppingCard
-            shoppingCard={shoppingCard}
-            expand={expand}
-            setExpand={setExpand}
-          />
-          <div>{shoppingCard.length === 0 && <div>Sepet Boş</div>}</div>
-        </div>
+                <ShoppingCard
+                  shoppingCard={shoppingCard}
+                  expand={expand}
+                  setExpand={setExpand}
+                />
+                <div>{shoppingCard.length === 0 && <div>Sepet Boş</div>}</div>
+              </div>
             </div>
           </Col>
         </Row>

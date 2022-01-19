@@ -7,8 +7,13 @@ function index({ setModal, modal, info }) {
       {modal === true && (
         <div className="errorBox">
           <div className="errorBoxTop">
-            <div className="errors"> <strong> Hata</strong></div>
-            <button className="errorIcon" onClick={() => setModal(false)}>X</button>
+            <div className="errors">
+              {" "}
+              <strong> Hata</strong>
+            </div>
+            <button className="errorIcon" onClick={() => setModal(false)}>
+              X
+            </button>
           </div>
 
           <div className="errorName">

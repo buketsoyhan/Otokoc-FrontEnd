@@ -6,20 +6,27 @@ import { mergeAll } from "ramda";
 import { useNavigate } from "react-router-dom";
 
 const validationUserSchema = Yup.object({
-  username: Yup.string().min(8).required("En az 8 karakterli bir kullanıcı adı giriniz"),
-  password: Yup.string().required("Şifre Zorunlu alan").matches(
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-    "Şifreniz en az 8 karakter, en az 1 rakam, en az 1 büyük ve 1 küçük harf ve özel karakter içermelidir")
+  username: Yup.string()
+    .min(8)
+    .required("En az 8 karakterli bir kullanıcı adı giriniz"),
+  password: Yup.string()
+    .required("Şifre Zorunlu alan")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+      "Şifreniz en az 8 karakter, en az 1 rakam, en az 1 büyük ve 1 küçük harf ve özel karakter içermelidir"
+    ),
 });
 
 const validationEmailSchema = Yup.object({
   username: Yup.string()
     .email("Geçerli bir email adresi giriniz")
     .required("Email Zorunlu alan"),
-  password: Yup.string().matches(
+  password: Yup.string()
+    .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-    "Şifreniz en az 8 karakter, en az 1 rakam, en az 1 büyük ve 1 küçük harf ve özel karakter içermelidir")
-    .required("Şifre Zorunlu alan")
+      "Şifreniz en az 8 karakter, en az 1 rakam, en az 1 büyük ve 1 küçük harf ve özel karakter içermelidir"
+    )
+    .required("Şifre Zorunlu alan"),
 });
 
 const Login = (props) => {
@@ -28,7 +35,6 @@ const Login = (props) => {
   const [modal, setModal] = useState(false);
   const [errors, setErrors] = useState([]);
   const [info, setInfo] = useState([]);
-
 
   useEffect(() => {
     validation();
@@ -73,7 +79,6 @@ const Login = (props) => {
     e.preventDefault();
     setModal(true);
     setInfo(errors);
-    console.log("info", info);
     if (
       username !== "" &&
       password !== "" &&
@@ -85,8 +90,6 @@ const Login = (props) => {
       setErrors([]);
     setUsername("");
     setPassword("");
-    console.log(errors);
-    console.log(errors.username);
   };
 
   const navigate = useNavigate();
@@ -125,14 +128,23 @@ const Login = (props) => {
               value={password}
             />
             <br></br>
-            <button className="buttonClass" type="submit" onClick={handleSubmit}>
+            <button
+              className="buttonClass"
+              type="submit"
+              onClick={handleSubmit}
+            >
               {" "}
               Giriş Yap{" "}
             </button>
           </form>
         </div>
       </div>
-      <div className="errorArea"> {modal === true && <Modal info={info} setModal={setModal} modal={modal} />} </div>
+      <div className="errorArea">
+        {" "}
+        {modal === true && (
+          <Modal info={info} setModal={setModal} modal={modal} />
+        )}{" "}
+      </div>
     </div>
   );
 };

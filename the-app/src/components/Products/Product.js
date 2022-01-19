@@ -9,9 +9,8 @@ function Product({ product, shoppingCard, setShoppingCard }) {
       amount: amount,
       price: product.price,
     };
-    console.log("item", item);
     setShoppingCard([...shoppingCard, item]);
-    setAmount ("1");
+    setAmount("1");
   };
 
   return (
@@ -30,19 +29,25 @@ function Product({ product, shoppingCard, setShoppingCard }) {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           style={{ width: "5rem", justifyContent: "center" }}
-          className="amount"
+          className="product amount"
           type="number"
           placeholder="Adet"
         ></input>
-      <div className="" style={{margin:"auto"}}>
-      <button
-          style={{ marginLeft: "200px", alignItems: "center", width:20, height:20, display:"flex", justifyContent:"center"}}
-          className="add-button"
-          onClick={() => onAdd(product)}
-        >
-          +
-        </button>
-      </div>
+        <div className="" style={{ margin: "auto" }}>
+          <button
+            style={{
+              alignItems: "center",
+              width: 30,
+              height: 30,
+              display: "flex",
+              justifyContent: "center",
+            }}
+            className="product  addButton"
+            onClick={() => onAdd(product)}
+          >
+            +
+          </button>
+        </div>
       </div>
     </div>
   );

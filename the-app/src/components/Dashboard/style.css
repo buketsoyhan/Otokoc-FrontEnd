@@ -14,16 +14,15 @@
   font-size: 2.5rem;
   margin-left: 0.5rem;
 }
-.userIcon{
+.userIcon {
   /* text-align: center; */
   display: flex;
   align-items: center;
   margin-left: 2rem;
 }
-.icon{
+.icon {
   margin-top: 40px;
   font-size: 30px;
-
 }
 
 .main {
@@ -37,12 +36,6 @@
 .dashboard {
   /* max-width: 60%; */
 }
-.basket {
-  /* margin-right: 150px;
-  max-width: 250%; */
-  /* margin-left: 200px; */
-}
-
 option {
   width: 5rem;
 }
@@ -72,15 +65,14 @@ option {
   background-color: #e2e8f0;
 }
 
-.small{
+.small {
   margin-left: 200px;
   margin-right: 20px;
   font-size: 18px;
 }
 
-.large{
+.large {
   margin-left: 50px;
   margin-right: 20px;
   font-size: 18px;
-
 }

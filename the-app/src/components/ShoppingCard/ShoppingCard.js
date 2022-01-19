@@ -1,35 +1,30 @@
 import React from "react";
 import "./style.css";
 function ShoppingCard({ shoppingCard, expand, setExpand }) {
-  
-  const sumPrice = (type) =>{
-    let sum=0;
-    let kdv=0;
-    let total=0;
-    shoppingCard.map((card)=>{
+  const sumPrice = (type) => {
+    let sum = 0;
+    let kdv = 0;
+    let total = 0;
+    shoppingCard.map((card) => {
       sum += card.price * card.amount;
-    })
+    });
 
-    kdv=sum * 0.18;
+    kdv = sum * 0.18;
 
-
-    if(type==="sum"){
+    if (type === "sum") {
       return sum;
-    
     }
-    if(type==="kdv"){
+    if (type === "kdv") {
       return kdv;
+    } else {
+      return kdv + sum;
     }
-    else{
-      return kdv+sum;
-    }
-  }
+  };
 
   return (
     <div>
       {expand === false && (
         <div className="original">
-
           <h3>
             <strong>Sepet Özeti</strong>
           </h3>
@@ -42,8 +37,7 @@ function ShoppingCard({ shoppingCard, expand, setExpand }) {
                 </div>
               );
             })}
-            <hr></hr>
-
+          <hr></hr>
         </div>
       )}
       {expand === true && (
@@ -54,34 +48,29 @@ function ShoppingCard({ shoppingCard, expand, setExpand }) {
           {shoppingCard.length !== 0 &&
             shoppingCard.map((card, index) => {
               return (
-               
-                  <div className="expandedItems" key={index}>
-                    <span>{card.partNo}</span>
-                    <span>{card.amount} Ad.</span>
-                    <span>{card.price} TL</span>
-
-                  </div>
-            
+                <div className="expandedItems" key={index}>
+                  <span>{card.partNo}</span>
+                  <span>{card.amount} Ad.</span>
+                  <span>{card.price} TL</span>
+                </div>
               );
             })}
-            <hr></hr>
-            <div style={{display:"flex", justifyContent:"space-between" }} >
-              <span>Ara Toplam</span>
-              <span>{sumPrice("sum")} TL</span>
-            </div>
-            <div style={{display:"flex", justifyContent:"space-between" }}>
+          <hr></hr>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <span>Ara Toplam</span>
+            <span>{sumPrice("sum").toFixed(2)} TL</span>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
             <span>KDV</span>
             <span>%18</span>
-              <span>{sumPrice("kdv")} TL</span>
-              </div>  
-            <div style={{display:"flex", justifyContent:"space-between" }}>
-              <span><strong> Toplam</strong> </span>
-              <span>{sumPrice("total")} TL</span> 
-              </div>
-
-
-
-
+            <span>{sumPrice("kdv").toFixed(2)} TL</span>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <span>
+              <strong> Toplam</strong>{" "}
+            </span>
+            <span>{sumPrice("total").toFixed(2)} TL</span>
+          </div>
         </div>
       )}
     </div>
