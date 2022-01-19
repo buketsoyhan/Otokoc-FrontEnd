@@ -14,8 +14,10 @@ cd Otokoc-FrontEnd
 code .
 
 # Projenin Başlatılması
-Projeyi ilgili IDE'de açtıktan sonra bir alt dizine gidilir ve bu dizinde proje çalıştırılır.
+Projeyi ilgili IDE'de açtıktan sonra bir alt dizine gidilir. npm install diyerek projede kullanılan eklentilerin indirilmesi sağlanır daha sonra npm start diyerek proje çalıştırılır.
 
 cd the-app
+
+npm install
 
 npm start
